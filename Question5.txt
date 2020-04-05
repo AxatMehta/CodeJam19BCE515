@@ -1,0 +1,55 @@
+import numpy
+
+t=0
+n=0
+k=0
+i=0
+rs=numpy.zeros((60, 60), dtype=bool)
+cs=numpy.zeros((60, 60), dtype=bool)
+matrix=numpy.zeros((60, 60), dtype=int)
+sol=False 
+
+ 
+def method1(row,col,m):
+    global sol
+    if(row == n and col == n + 1 and m == k and not sol):
+        sol = True
+        print("Case #{}: POSSIBLE".format(i+1))
+        x=1
+        while(x<=n):
+            y=1
+            while(y<=n):
+                print(matrix[x][y],end=" ")
+                y+=1
+            print()
+            x+=1
+        return
+    elif(row>n):
+        return
+    elif(col>n):
+	    method1(row + 1, 1, m)
+    x=1
+    while(x<=n and not sol):
+        if(not rs[row][x] and not cs[col][x]):
+            rs[row][x] = cs[col][x] = True
+            if(row == col):
+                m += x
+            matrix[row][col] = x
+            method1(row, col + 1, m)
+            rs[row][x] = cs[col][x] = False
+            if(row == col):
+                m -= x
+            matrix[row][col] = 0
+        x+=1
+   
+   
+
+
+
+t=int(input())
+for i in range(t):
+    n,k=map(int,input().split())
+    method1(1, 1, 0)
+    if(not sol):
+        print("Case #{}: IMPOSSIBLE".format(i+1))
+    sol=False
