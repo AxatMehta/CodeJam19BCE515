@@ -1,0 +1,41 @@
+t=int(input())
+
+for i in range(t):
+    n=int(input())
+    row=0
+    col=0
+    sm=0
+    r=[]
+    li=[]
+    for j in range(n):
+        li=list(map(int,input().split()))
+        r.append(li)
+        s=set(li)
+        for x in s:
+            if(li.count(x)!=1):
+                row+=1
+                break
+                
+    cli=[]
+    ind=0
+    for x in range(n):
+        cl=[]
+        
+        for z in range(n):
+            cl.append(r[z][ind])
+        ind+=1
+            
+        s=set(cl)
+        for z in s:
+            if(cl.count(z)!=1):
+                col+=1
+                break
+                    
+    for x in range(0,n):
+       sm+=r[x][x]
+        
+                    
+    print("Case #{}: {} {} {}".format(i+1,sm,row,col))
+            
+        
+        

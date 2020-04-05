@@ -1,0 +1,67 @@
+from itertools import combinations
+import numpy as np
+import sys
+
+def compli(bit): return [
+    '_' if b is '_' else 
+    '1' if b=='0' else '0' 
+    for b in bit
+]
+
+class method1():
+    def __init__(self, B):
+        self.bit = ['_'] * B
+        self.u = list(range(B))
+        self.read(10)
+        self.run()
+
+    def read(self, n):
+        for _ in range(n):
+            i = self.u.pop()
+            self.bit[i] = self.readbit(i+1)
+            self.u = self.u[::-1]
+        self.upstat()
+
+    def readbit(self, i):
+        print(i, flush=True)
+        return input()
+
+    def upstat(self):
+        self.bit_c  = compli(self.bit)
+        self.bit_cr = self.bit_c[::-1]
+        self.bit_r  = compli(self.bit_cr)
+        self.s = [self.bit, self.bit_c, self.bit_cr, self.bit_r]
+
+    def geti(self):
+        c = list(set(range(B)) - set(self.u))
+        ms = len(set(map(tuple, self.s)))
+        for idx in combinations(c, 2):
+            num_s = len(set(
+                tuple(np.take(state, idx))
+                for state in self.s
+            ))
+            if num_s == ms: return idx
+
+    def clp(self):        
+        ti = self.geti()
+        test = [self.readbit(i+1) for i in ti]
+                
+        self.bit = next(state
+            for state in self.s
+            if test == list(np.take(state, ti))
+        )
+
+    def run(self):
+        while True:
+            self.clp()
+            try: self.read(8)
+            except IndexError: break
+    
+
+T, B = map(int, input().split())
+print('B:', B, file=sys.stderr)
+for _ in range(T): 
+    array = method1(B)
+    print('guess:', ''.join(array.bit), file=sys.stderr)
+    print(''.join(array.bit), flush=True)
+    if input() == 'N': sys.exit()

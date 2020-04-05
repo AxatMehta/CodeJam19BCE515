@@ -1,0 +1,31 @@
+def f(arra):
+    arr = []
+    for i in range(len(arra)):
+        arr.append((arra[i][0], arra[i][1], i))
+    arr.sort()
+    c_end = 0
+    j_end = 0
+    resarr = []
+    for start, end, idx in arr:
+        if start < c_end and start < j_end:
+            return "IMPOSSIBLE"
+        if start >= c_end:
+            resarr.append(('C', idx))
+            c_end = end
+        else:
+            resarr.append(('J', idx))
+            j_end = end
+    res = ''
+    for c, idx in sorted(resarr, key=lambda x: x[1]):
+        res += c
+    return res
+
+T = int(input())
+for t in range(1, T + 1):
+    N = int(input())
+    arr = []
+    for _ in range(N):
+        interval = [int(s) for s in input().split(" ")]
+        arr.append(interval)
+    res = f(arr)
+    print("Case #{}: {}".format(t, res))

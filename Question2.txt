@@ -1,0 +1,60 @@
+ob='('
+cb=')'
+t=int(input())
+
+for i in range(t):
+    n=input()
+    fl=[]
+    for s in n:
+        temp=[]
+        for x in range(int(s)):
+            temp.insert(0,ob)
+            temp.insert(len(temp),cb)
+        temp.insert((len(temp)//2),int(s))
+        fl.append(temp)
+    #print(fl)
+    l=len(fl)
+    out=[]
+    ind=0
+    while(l>0):
+        
+        if(len(out)==0):
+            for x in fl[ind]:
+                out.append(x)
+            ind+=1
+        else:
+            ol=len(out)-1
+            nl=len(fl[ind])-1
+            count=0
+           
+            while(out[ol]==fl[ind][nl] and ol>=0):
+                if(type(out[ol])==int and type(fl[ind][nl])==int):
+                    ol-=1
+                    nl-=1
+                    break
+                else:
+                    ol-=1
+                    nl-=1
+                    count+=1
+            ins=len(out)-(count)
+            for z in range(count,len(fl[ind])-count):
+                out.insert(ins,fl[ind][z])
+                ins+=1
+            ind+=1
+        l-=1
+        #print(out)
+    stri=""
+    for m in out:
+        stri+=str(m)
+        
+    print("Case #{}: {}".format(i+1,stri))
+        
+            
+            
+            
+            
+        
+        
+            
+        
+        
