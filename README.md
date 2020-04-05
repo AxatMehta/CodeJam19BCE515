@@ -8,4 +8,10 @@ I have uploaded my submitted code at CodeJam in .txt file format.
 
 Along with code files I have also uploaded Result.jpg file containing my Results of Code Jam 2020.
 
+Rank: 933
+
+Points: 75
+
+Qualified for next Round.
+
 
